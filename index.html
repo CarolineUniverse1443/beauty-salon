@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Carattere&display=swap" rel="stylesheet">
+    <title>Салон красоты "Стиль"</title>
+</head>
+<body>
+    <div id="app">
+        <div class="wrap">
+            <header>
+                <img src="img//logo.png" id="logo" alt="logo">
+                <input id="burger" type="checkbox" />
+                <label id="cross" for="burger">
+                </label>
+                <nav> 
+                    <a href="#" v-if="section != 'main' && page == 'home' || page == 'admin'" @click.prevent="page = 'home'; section = 'main'">Главная</a>
+                    <a href="#" v-if="role != 'admin'" @click.prevent="page = 'home'; section = 'favors'; getEntries('services')">Услуги</a>
+                    <a href="#" @click.prevent="page = 'home'; section = 'about'; table = ''">О нас</a>
+                    <a href="#" @click.prevent="page = 'home'; section = 'suppliers'; table = ''">Наши партнеры</a>
+                    <a href="#" @click.prevent="page = 'home'; section = 'contacts'; table = ''">Контакты</a>
+                    <a href="#" v-if="token != null" @click.prevent="myEntries">Мои записи</a>
+                    <a href="#" v-if="role == 'admin'" @click.prevent="page = 'admin'; table = ''">Админка</a>
+                </nav>
+                <div  id="login">
+                    <template v-if="page !== 'login' && page !== 'signup'">
+                        <span class="reg" v-if="token == null" @click="page = 'login'">Войти</span>
+                        <span class="reg" v-if="token != null" @click="logout">Выйти</span>
+                    </template>
+                    <span class="reg" v-if="page == 'login' || page == 'signup'" @click="section = 'main'; page = 'home'">Главная</span>
+                </div>
+            </header>
+            <main>
+                <div v-if="page == 'home'">
+                    <section id="prim" v-if="section == 'main'">
+                        <div id="banner">Style</div>
+                        <div id="main_serv">
+                            <div id="nails"></div>
+                            <div class="text">Наращивание ногтей</div>
+                            <div class="text">Маникюр</div>
+                            <div id="manic"></div>
+                            <div id="ped"></div>
+                            <div class="text">Педикюр</div>
+                        </div>
+
+                        <section id="manicure">
+                            <h2> Маникюр во Владикавказе </h2>
+                            <article>
+                                <p>Где сделать маникюр? Этот вопрос волнует женщин и мужчин, которые хотят выглядеть безупречно всегда, а не от случая к случаю. Для самостоятельного ухода за ногтями требуется время и специальные навыки, да и зачем осложнять себе жизнь, если уже сегодня профессионалы салона <strong>Стиль</strong> приглашают вас сделать маникюр недорого во Владикавказе.</p>
+                                <img src="img/manicur-apparat.jpg">
+                                <p>Приведение ногтей в идеальный вид начинается с размягчения ногтевой пластины и кожи вокруг нее. Затем аккуратно удаляются заусенцы и остатки огрубевшего эпидермиса, по желанию клиента выполняется SPA-уход и косметический массаж для рук. Низкая цена маникюра при высоком качестве услуг &ndash; одно из главных преимуществ нашего салона.</p>
+                                
+                                <p @click="page = 'login'" id="appoint">Записаться на маникюр</p>
+                                
+                                <p>Наш ногтевой сервис &ndash; это полный спектр процедур, косметика лучших мировых линий, талантливые мастера и потрясающий результат!</p>
+                                
+                                <h2>Профессиональный и недорогой маникюр</h2>
+                                
+                                <div class="quote">
+                                    <ul class="list">
+                                        <li> все виды профессионального маникюра &ndash; традиционный обрезной, аппаратный и смешанный, европейский и лечебный, мужской и детский;</li>
+                                        <li>косметика премиум-класса TNL, KODI, BEAUTIX, LUXIO, GELCOLOR-OPI,&nbsp;термогели, покрытие &laquo;кошачий глаз&raquo; и другие виды стильного ногтевого дизайна;</li>
+                                        <li>только натуральные косметические лосьоны, масла и кремы,</li>
+                                        <li>оздоровление ногтей с помощью инновационной процедуры IBX и специализированного покрытия VitaGel;</li>
+                                        <li>качественные маникюрные инструменты, которые не нарушают природную структуру ногтей и позволяют производить самую тонкую и деликатную обработку кутикулы;</li>
+                                    </ul>
+                                </div>
+                                
+                                <p>Специалисты салона подробно расскажут о преимуществах разных видов маникюра и помогут выбрать оптимальный вариант, в зависимости от состояния ногтей, финансовых возможностей и ваших личных вкусов</p>
+                                
+                                <p>Также мы предлагаем сделать Ваши ноготки не только ухоженными, но и красивыми! Покрытие лаком, лечебными средставми и различные сопутствующие процедуры от опытных мастеров!</p>
+
+                                <div class="view">
+                                    <img class="varnish" src="img/water.jpg">
+                                    <img class="varnish" src="img/dry.jpg">
+                                    <img class="varnish" src="img/basa.jpg">
+                                </div>
+                                
+                                <p>Мы идеально соблюдаем гигиенические нормы, используем только одноразовые расходные материалы, стерилизуем инструменты по хирургическим стандартам. Каждый, кто хотя бы раз ощутил на своих руках мастерство и внимание специалистов, уже не ищет, где сделать маникюр во Владикавказе по доступной стоимости, а становится нашим постоянным клиентом и рекомендует нас своим друзьям и знакомым.</p>
+                                
+                                <p>Воспользуйтесь услугами маникюра в Стиле, и Вы будете гордиться своими руками!</p>
+                            
+                            </article>
+                        </section>
+                        <!-- <h1 style="text-align: center; width: 100%">Главная страница</h1> -->
+                    </section>
+                    <section id="about" v-if="section == 'about'">
+                        <p>Вы любите себя, уважаете окружающих людей, умеете ценить красоту во всех проявлениях и не отказываетесь от маленьких удовольствий? Салон красоты Стиль предлагает: давайте дружить!</p>
+                        <p>Перешагнув наш порог, вы попадете в чудесный мир профессионального nail-искусства и эксклюзивных достижений индустрии красоты 21 века, познакомитесь с талантливыми мастерами современного маникюра, парикмахерской стилистики и авторского визажа. А главное &ndash; выстроите собственный неповторимый образ, яркий и притягательный.</p>
+                        <div class="view">
+                            <div class="salon f"></div>
+                            <div class="salon s"></div>
+                        </div>
+                        <h2>Профессиональный салон маникюра</h2>
+    
+                        <div class="quote">
+                            <ul class="list">
+                                <li>У нас работают дипломированные специалисты, прошедшие лучшие российские школы отрасли. Мастера постоянно совершенствуют знания и умения на престижных курсах.</li>
+                                <li>Мы используем только одноразовые расходные материалы и аппаратные насадки, а ручные инструменты стерилизуем в автоклавах. Абсолютная гигиеничность и санитарная безопасность для нас не идеал, а реальный факт.</li>
+                                <li>Мы пользуемся толкьо надежной продукцией -&nbsp; премиум-косметика Artistic Сolour&nbsp;gloss, CDN, OPI, Shellac, Cuccio, Masura, Creative&nbsp;Nail&nbsp;Design и так далее, проводим уникальные лечебные процедуры IBX и VitaGel.</li>
+                            </ul>
+                        </div>
+    
+                        <p>Мы предлагаем качественный и профессиональный уход за руками и ногами, волосами и кожей. Наши сотрудники всегда готовы дать ценные советы и разработать специально для вас оптимальную программу процедур. Вы обязательно полюбите наш салон маникюра и других услуг сферы beauty&nbsp;industry! Стиль&nbsp;позиционируется как студия маникюра, но список наших услуг выходит далеко за рамки нейл-сервиса и нейл-арта. Сегодня и всегда для вас &ndash; укладки и окрашивания волос по новейшим технологиям, плетение кос, наращивание ресниц, коррекция и окраска бровей.</p>
+
+    
+                        <h2>Мы ждем Вас в студии маникюра Стиль</h2>
+    
+                        <p>Наш салон работает для жителей и гостей города Владикавказ по самым доступным ценам. Мы всегда рады видеть у себя посетителей из соседних городов, поселков и сел. Будете проезжать мимо, сверните на час-другой с привычного маршрута и заедьте к нам, чтобы привести себя в порядок и поднять настроение.</p>
+                    </section>
+                    <section class="table" v-if="section == 'favors'">
+                        <table class="client_side">
+                            <tr>
+                                <th>id</th>
+                                <th>Название услуги</th>
+                                <th>Цена</th>
+                            </tr>
+                            <tr v-for="item in services" :key="item.service_id">
+                                <td>{{item.service_id}}</td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.price}}</td>
+                            </tr>
+                        </table>  
+                    </section>
+                    <section id="suppliers" v-if="section == 'suppliers'">
+                        <img src="img/ollin.jpg" class="logo">
+                        <p>Российская марка Ollin Professional пользуется большим спросом среди покупателей многих стран. Фирма дарит удивительный мир красоты и гармонии, уверенность в своей неотразимости. Косметика для волос произведена с учетом строгих требований и доказала свою эффективность в ходе тестирований. Всю продукцию фирмы отличает простота использования, удобство упаковки, качественные компоненты, текстура и ароматы. Роскошные блестящие и здоровые волосы с использованием профессиональной косметики – реальность!</p>
+
+                        <img src="img/502_estel.jpg" class="logo">
+                        <p>Ведущий российский производитель профессиональных средств для волос ESTEL PROFESSIONAL. Хорошее качество, широчайший ассортимент,  доступная цена для салонной косметики - главные преимущества этого бренда. В косметике Эстель, линии для окрашивания, стайлинга и ухода представлены в сериях для каждого из типов волос с индивидуальными компонентами для создания нового имиджа в сочетании с бережным уходом. Estel Pro. - одна из самых успешных современных российских марок. С помощью продукции этого бренда можно добиться удивительного, быстрого, качественного результата. Косметику для волос, средства для укладки, краски, лечебные составы очень любят мастера и их клиенты.</p>
+                    </section>
+                    <section id="contacts" v-if="section == 'contacts'">
+                            <h2>Контактные данные салона Стиль</h2>
+                            
+                            <div class="quote">
+                                <p><strong>Адрес</strong>: Северная Осетия-Алания, г. Владикавказ, ул. Васо Абаева, 89</p>
+                                
+                                <p><strong>Телефоны</strong>:&nbsp;&nbsp;+7 (928) 177-73-71;&nbsp; +7 (928) 119-22-82</p>
+                                                                
+                                <p><strong>График работы</strong>: ежедневно с 09-00 до 21-00.</p>
+                                
+                                <p>Хотите стать нашим партнером? Звоните нам и мы обязательно рассмотрим Ваши предложения</p>
+                            </div>
+                            
+                            <p id="map">Карта</p>
+                            
+                            <p id="loc">Студия расположена напротив рынка "Сахалин", рядом с Магнитом</p>
+                            
+                            <div id="style"></div>
+                    </section>
+
+                </div>
+                <div v-if="page == 'login'">
+                    <section id="entry">
+                        <h3>Вход</h3>
+                        <form id="signin">
+                            <p class="error req" v-if="error">{{ error }}</p>
+                            <p class="error req" v-for="err in errors">{{ err[0] }}</p>
+                            <p><input type="phone" name="login" v-model="form.client_phone" size="20" id="tel" placeholder="Телефон" required></p>
+                            <p><input type="text" name="password" v-model="form.password" size="20" id="pass" placeholder="Пароль" required></p>
+                            <input type="submit" value="Войти" id="log" @click.prevent="signin">
+                            <p id="create"><span @click="page = 'signup'">Зарегистрироваться</span></p>
+                        </form>
+                    </section>
+                </div>
+                <div v-if="page == 'signup'">
+                    <section id="signup">
+                        <h3>Регистрация</h3>
+                        <form id="signin">
+                            <p class="error req" v-for="err in errors">{{ err[0] }}</p>
+                            <p><input type="text" name="name" v-model="form.client_name" size="20" placeholder="ФИО" required></p>
+                            <p><input type="phone" name="login" v-model="form.client_phone" size="20" id="tel" placeholder="Телефон" required></p>
+                            <p><input type="text" name="pass" v-model="form.password" size="20" id="pass_n" placeholder="Пароль" required></p>
+                            <input type="submit" value="Зарегистрироваться" id="sign" @click.prevent="register">
+                            <p id="relog">Уже регистрировались? <span @click="page = 'login'">Войти</span></p>
+                        </form>
+                    </section>
+                </div>
+                <div v-if="page == 'private'">
+                    <section id="appointment">
+                        <p v-if="orders.length == 0">Вы у нас впервые? Запишитесь на услугу прямо сейчас!</p>
+                        <form id="book">
+                            <input type="text" name="name" v-model="form.order_id" size="20" id="number" placeholder="order_id">
+                            <input type="text" name="id" v-model="form.client_id" size="20" id="cust" class="none" placeholder="Клиент" required>
+                            <p class="error req" v-if="error != ''">{{ error }}</p>
+                            <input type="text" name="service" v-model="form.favor_id" id="favor" size="20" placeholder="Услуга" required>
+                            <input type="text" name="employee" v-model="form.employee_id" size="20" id="worker" placeholder="Сотрудник" required>
+                            <input type="text" name="data" v-model="form.data" size="20" id="date" placeholder="Дата" required>
+                            <input type="text" name="time" v-model="form.time" size="20" id="time" placeholder="Время" required>
+                            <button @click.prevent="add_order" class="add" v-if="option == 'add'">Отправить</button>
+                            <button @click.prevent="update_order(form.order_id, form.data)" class="add change" v-if="option == 'edit'">Изменить</button>
+                        </form>
+
+                        <table id="order" class="history">
+                            <tr>
+                                <th>id</th>
+                                <th>client id</th>
+                                <th>service id</th>
+                                <th>employee id</th>
+                                <th>data</th>
+                                <th>time</th>
+                                <th class="edit"></th>
+                                <th class="del"></th>
+                            </tr>
+                            <tr v-for="entry in orders" :key="entry.order_id">
+                                <td>{{entry.order_id}}</td>
+                                <td>{{entry.client_id}}</td>
+                                <td>{{entry.service_id}}</td>
+                                <td>{{entry.employee_id}}</td>
+                                <td>{{entry.data}}</td>
+                                <td>{{entry.time}}</td>
+                                <td class="edit" @click="battery2(entry.order_id, entry.client_id, entry.service_id, entry.employee_id, entry.data, entry.time)"><div><p></p></div></td>
+                                <td class="del" @click="deleteEntry(entry.order_id, table, entry.data)"><div><p></p></div></td>
+                            </tr>
+                        </table>
+                    </section>
+                </div>
+                    <section id="panel" v-if="page == 'admin'">
+                        <button @click="getEntries('orders')">Заказы</button>
+                        <button @click="getEntries('clients')">Клиенты</button>
+                        <button @click="getEntries('services')">Услуги</button>
+                        <button @click="getEntries('materials')">Материалы</button>
+                        <form id="browse">
+                            <input type="search" name="catalog" placeholder="Поиск..." v-model="finder">
+                        </form>
+                        <div id="loading" v-if="isLoading">
+                            <div id="gif"></div> 
+                        </div>
+                    </section>
+                    <section class="table" v-if="table == 'orders' && page != 'private'">
+                        <section id="tools">
+                            <form id="book">
+                                <input type="text" name="name" v-model="form.order_id" size="20" id="number" placeholder="order_id">
+                                <input type="text" name="id" v-model="form.client_id" size="20" id="cust" placeholder="Клиент" required >
+                                <input type="text" name="service" v-model="form.favor_id" id="favor" size="20" placeholder="Услуга" required >
+                                <input type="text" name="employee" v-model="form.employee_id" size="20" id="worker" placeholder="Сотрудник" required>
+                                <input type="text" name="data" v-model="form.data" size="20" id="date" placeholder="Дата" required>
+                                <input type="text" name="time" v-model="form.time" size="20" id="time" placeholder="Время" required>
+                                <button @click.prevent="add_order" class="add" v-if="option == 'add'">Добавить</button>
+                                <button @click.prevent="update_order(form.order_id)" class="add change" v-if="option == 'edit'">Изменить</button>
+                            </form>
+                        </section>
+                        <table id="order">
+                            <tr>
+                                <th>id</th>
+                                <th>client id</th>
+                                <th>service id</th>
+                                <th>employee id</th>
+                                <th>data</th>
+                                <th>time</th>
+                                <th class="edit"></th>
+                                <th class="del"></th>
+                            </tr>
+                            <tr v-for="entry in orders" :key="entry.order_id">
+                                <td>{{entry.order_id}}</td>
+                                <td>{{entry.client_id}}</td>
+                                <td>{{entry.service_id}}</td>
+                                <td>{{entry.employee_id}}</td>
+                                <td>{{entry.data}}</td>
+                                <td>{{entry.time}}</td>
+                                <td class="edit" @click="battery2(entry.order_id, entry.client_id, entry.service_id, entry.employee_id, entry.data, entry.time)"><div><p></p></div></td>
+                                <td class="del" @click="deleteEntry(entry.order_id, table)"><div><p></p></div></td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section class="table" v-if="table == 'clients'">
+                        <table id="client">
+                            <tr>
+                                <th>id</th>
+                                <th>client name</th>
+                                <th>login</th>
+                                <th>password</th>
+                            </tr>
+                            <tr v-for="peace in clients" :key="peace.client_id">
+                                <td>{{peace.client_id}}</td>
+                                <td>{{peace.client_name}}</td>
+                                <td>{{peace.client_phone}}</td>
+                                <td>{{peace.password}}</td>
+                            </tr>
+                        </table>
+                    </section>
+                   
+                    <section class="table" v-if="table == 'services'">
+                        <section id="tools">
+                            <form>
+                                <input type="text" name="name" v-model="form.service_id" size="20" id="number">
+                                <input type="text" name="name" v-model="form.name" size="20" placeholder="Название услуги" id="serv"required>
+                                <input type="text" name="price" v-model="form.price" size="20" placeholder="Цена" id="price" required>
+                                <button @click.prevent="add_service" class="add" v-if="option == 'add'">Добавить</button>
+                                <button @click.prevent="update_service(form.service_id)" class="add" v-if="option == 'edit'">Изменить</button>
+                            </form>
+                        </section>
+                        <table id="service">
+                            <tr>
+                                <th>id</th>
+                                <th>name</th>
+                                <th>price</th>
+                                <th class="edit"></th>
+                                <th class="del"></th>
+                            </tr>
+                            <tr v-for="item in services" :key="item.service_id">
+                                <td>{{item.service_id}}</td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.price}}</td>
+                                <td class="edit" @click="battery(item.service_id, item.name, item.price)"><div><p></p></div></td>
+                                <td class="del" @click="deleteEntry(item.service_id, table)"><div><p></p></div></td>
+                            </tr>
+                        </table>
+                    </section>
+                    
+                    <section class="table" v-if="table == 'materials'">
+                        <table id="material">
+                            <tr>
+                                <th>id</th>
+                                <th>name</th>
+                                <th>price</th>
+                            </tr>
+                            <tr v-for="unit in materials" :key="unit.material_id">
+                                <td>{{unit.material_id}}</td>
+                                <td>{{unit.name}}</td>
+                                <td>{{unit.price}}</td>
+                            </tr>
+                        </table>
+                    </section>
+                    <div id="marg"></div>
+                <!-- </div> -->
+            </main>
+        </div>    
+        <footer>
+            <p id="copy"> &copy; 2011-2021. Все права защищены. Салон красоты "Стиль"</p>
+        </footer>
+    </div>
+    <script src="vue.global.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> -->
+    <script src="main.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Авторизация</title>
+</head>
+<body>
+    <div id="app">
+        <div class="wrap">
+            <header>
+                <img src="img//logo.png" id="logo" alt="logo">
+                <input id="burger" type="checkbox" />
+                <label id="cross" for="burger">
+                </label>
+                <nav> 
+                    <a href="#">Услуги</a>
+                    <a href="#">О нас</a>
+                    <a href="#">Наши партнеры</a>
+                    <a href="#">Контакты</a>
+                </nav>
+                <div  id="login">
+                    <a href="index.html" id="reg">Главная</a>
+                </div>
+            </header>
+            <main>
+                <!-- Main content -->
+                <section id="entry">
+                    <h3>Вход</h3>
+                    <form action="private.html" id="signin">
+                        
+                        <p><input type="phone" name="login" v-model="form.client_phone" size="20" id="tel" placeholder="Телефон" required></p>
+                        <p><input type="text" name="password" v-model="form.password" size="20" id="pass" placeholder="Пароль" required></p>
+                        <p id="forg"><a href="#">Забыли пароль?</a></p>
+                        <input type="submit" value="Войти" id="log" @click="signin">
+                        <p id="create"><a href="signup.html">Зарегистрироваться</a></p>
+                    </form>
+                </section>
+            </main>
+        </div>    
+        <footer>
+            <p id="copy"> &copy; 2011-2021. Все права защищены. Салон красоты "Стиль"</p>
+        </footer>
+    </div>
+
+    <script src="vue.global.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
